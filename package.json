@@ -1,0 +1,18 @@
+{
+  "name": "gestion-tesis-unt",
+  "version": "1.0.0",
+  "description": "Monorepo para el sistema de Gestión de Tesis - Universidad Nacional de Trujillo",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "paquetes/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspaces --if-present",
+    "build": "npm run build --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
