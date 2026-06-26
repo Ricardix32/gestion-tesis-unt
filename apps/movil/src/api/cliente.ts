@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { obtenerAccessToken, obtenerRefreshToken, guardarTokens, eliminarTokens } from '../servicios/almacenamiento';
 
-const baseURL = process.env.EXPO_PUBLIC_API_URL || 'http://10.0.2.2:3000';
+const baseURL = process.env.EXPO_PUBLIC_API_URL || 'http://10.0.2.2:4000';
 
 const api = axios.create({ baseURL });
 

@@ -41,7 +41,7 @@ Asegúrate de contar con las siguientes herramientas instaladas en tu equipo de 
 
 - **Node.js**: v22.x o superior
 - **NPM**: v11.x o superior
-- **Docker & Docker Compose**: Para correr la base de datos PostgreSQL y Redis locales.
+- **Docker & Docker Compose**: Para correr los servicios de PostgreSQL, Redis y MinIO locales.
 
 ---
 
@@ -55,20 +55,29 @@ Ejecuta la instalación desde la carpeta raíz. NPM Workspaces se encargará de 
 npm install
 ```
 
-### 2. Levantar Bases de Datos locales (PostgreSQL & Redis)
-Navega a la carpeta de infraestructura docker y levanta los servicios. El contenedor de PostgreSQL cargará de forma automática el script `schema.sql` ubicado en `infra/scripts`:
+### 2. Levantar Servicios locales (PostgreSQL, Redis & MinIO)
+Navega a la carpeta de infraestructura docker y levanta los servicios. El contenedor de PostgreSQL cargará de forma automática el script `schema.sql` y MinIO estará disponible en `http://localhost:9000` (API) y `http://localhost:9001` (Consola):
 ```bash
 cd infra/docker
 docker compose up -d
 ```
 
-### 3. Compilar los paquetes compartidos
+### 3. Configurar Variables de Entorno (Storage / S3)
+Para el correcto funcionamiento del almacenamiento de documentos de tesis, define las siguientes variables en tu entorno o en el archivo `.env` de la API (`apps/api/.env`):
+```env
+S3_ENDPOINT=http://localhost:9000
+AWS_ACCESS_KEY=minioadmin
+AWS_SECRET_KEY=minioadmin
+S3_BUCKET_NAME=tesis-bucket
+```
+
+### 4. Compilar los paquetes compartidos
 Antes de iniciar los frontends o el backend, compila las librerías TypeScript comunes:
 ```bash
 npm run build
 ```
 
-### 4. Ejecutar el entorno de desarrollo
+### 5. Ejecutar el entorno de desarrollo
 Inicia todos los proyectos en modo de desarrollo simultáneamente:
 ```bash
 npm run dev

@@ -11,6 +11,12 @@ import { Injectable, BadRequestException } from '@nestjs/common';
       @InjectRepository(Asesoria) private asesoriasRepo: Repository<Asesoria>,
     ) {}
 
+    async obtenerPorId(proyectoId: string): Promise<ProyectoTesis> {
+      const proyecto = await this.proyectosRepo.findOne({ where: { id: proyectoId } });
+      if (!proyecto) throw new BadRequestException('Proyecto no encontrado');
+      return proyecto;
+    }
+
     async cambiarEstado(proyectoId: string, nuevoEstado: string, usuarioId: string) {
       const proyecto = await this.proyectosRepo.findOne({ where: { id: proyectoId } });
       if (!proyecto) throw new BadRequestException('Proyecto no encontrado');
